@@ -1,44 +1,61 @@
-import { useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
-import { selectToken } from "../account/authSlice";
-import { useGetFacultyQuery, useGetProfessorMutation } from "./facultySlice";
+import React from 'react';
 
-import "./BookDetails.scss";
+// Fake data for professors
+const fakeProfessors = [
+  {
+    id: 1,
+    name: 'Mr. Lang',
+    bio: 'studied at FSU, class of 2020.',
+    profileImage: 'pic here',
+    contactInfo: '555-555-5555; lang@FSU.org'
 
-/**
- * Details about a single book.
- * Users can reserve a book if they are logged in.
- */
-export default function BookDetails() {
-  const { id } = useParams();
-  const { data: book, isLoading } = useGetBookQuery(id);
+  },
+  {
+    id: 2,
+    name: 'Mrs. Reik',
+    bio: 'studied at TSU, class of 2006.',
+    profileImage: 'pic here',
+    contactInfo:'555-555-5552; reik@FSU.org'
+  },
+  {
+    id: 3,
+    name: 'Sir Yventek',
+    bio: 'studied at WSU, class of 2012.',
+    profileImage: 'pic here',
+    contactInfo: '555-555-5522; yventek@FSU.org'
+  },
+  {
+    id: 4,
+    name: 'Mme Gobstunt',
+    bio: 'studied at YSU, class of 2016',
+    profileImage: 'pic here',
+    contactInfo: '555-555-5222; gobstunt@FSU.org'
+  },
+  {
+    id: 5,
+    name: 'Dr. Stryknein',
+    bio: 'studied at HSU, class of 2011',
+    profileImage: 'pic here',
+    contactInfo: '555-555-2222; stryknein@FSU.org'
+  }
+];
 
-  const token = useSelector(selectToken);
-  const navigate = useNavigate();
-
-  const [reserveBook, { isLoading: isReserving }] = useReserveBookMutation();
-  const tryReserveBook = async (event) => {
-    event.preventDefault();
-    await reserveBook(book.id);
-    navigate("/account");
-  };
-
-  if (isLoading) return <p>Loading...</p>;
-
+const Professors = () => {
   return (
-    <main className="book-details">
-      <h1>{book.title}</h1>
-      <h2>{book.author}</h2>
-      <img src={book.coverimage} />
-      <p>{book.description}</p>
-      {token &&
-        (book.available ? (
-          <form onSubmit={tryReserveBook}>
-            <button>{isReserving ? "Reserving..." : "Reserve"}</button>
-          </form>
-        ) : (
-          <button disabled>Book is already reserved.</button>
+    <div>
+      <h1>Professors</h1>
+      <ul>
+        {fakeProfessors.map((professor) => (
+          <li key={professor.id}>
+            <h2>{professor.name}</h2>
+            <p>{professor.bio}</p>
+            <p>{professor.profileImage}</p>
+            <p>{professor.contactInfo}</p>
+          </li>
         ))}
-    </main>
+      </ul>
+    </div>
   );
-}
+};
+
+export default Departments;
