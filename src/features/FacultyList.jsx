@@ -27,7 +27,7 @@ export default function FacultyList() {
               {professor.name} {professor.email}
             </h2>
             <p>{professor.bio}</p>
-            <a href=""></a>
+            <img src={professor.image} alt={professor.name} />
           </li>
         ))}
       </ul>
