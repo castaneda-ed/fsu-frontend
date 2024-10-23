@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-
 import { useGetFacultyQuery } from "../store/facultySlice";
 
 export default function FacultyList() {
