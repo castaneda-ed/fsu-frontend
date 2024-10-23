@@ -1,11 +1,18 @@
-import {createBrowserRouter} from 'react-router-dom';
-import Department from './features/departments';
+import { createBrowserRouter } from "react-router-dom";
+import Department from "./features/departments";
+import FacultyList from "./features/FacultyList";
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <Root />,
-    children: [{index: true, element: <Department />}],
+    children: [
+      { index: true, element: <Department /> },
+      {
+        path: "/faculty",
+        element: <FacultyList />,
+      },
+    ],
   },
 ]);
 
