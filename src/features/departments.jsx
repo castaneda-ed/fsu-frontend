@@ -1,63 +1,38 @@
-import {useState} from 'react';
-// import departmentList from './data' //
-import './App.css';
+import React from 'react';
 
-export default function App() {
-  const [department] = useState(departmentList);
+// Fake data for departments
+const fakeDepartments = [
+  {
+    id: 1,
+    name: 'Computer Science',
+    description: 'Learn about algorithms, data structures, and more.',
+  },
+  {
+    id: 2,
+    name: 'Mathematics',
+    description: 'Explore calculus, linear algebra, and number theory.',
+  },
+  {
+    id: 3,
+    name: 'Physics',
+    description: 'Understand the laws of nature and the universe.',
+  },
+];
 
-  const [selectedDepartment, setSelectedDepartment] = useState();
-
-  /** Updates the selected department according to the given `id` */
-  function selectedDepartment(id) {
-    const department = department.find((p) => p.id === id);
-    setSelectedDepartment(department);
-  }
-  // Notice: we can use JSX in a variable in addition to returning it
-  const $departments = (
-    <ul className='departments'>
-      {department.map((department) => (
-        <li
-          key={department.id}
-          onClick={() => selectedDepartment(department.id)}
-        >
-          {department.name}
-        </li>
-      ))}
-    </ul>
-  );
-  const $selectedDepartmentTeachers = selectedDepartment?.teachers.length >
-    0 && (
+const Departments = () => {
+  return (
     <div>
-      <dt>Teachers</dt>
-      <dd>
-        <ul>
-          {selectedDepartment.teachers.map((t) => (
-            <li key={t.id}>{t.name}</li>
-          ))}
-        </ul>
-      </dd>
+      <h1>Departments</h1>
+      <ul>
+        {fakeDepartments.map((department) => (
+          <li key={department.id}>
+            <h2>{department.name}</h2>
+            <p>{department.description}</p>
+          </li>
+        ))}
+      </ul>
     </div>
   );
+};
 
-  // This allows us to name the "render" sections of our code
-  const $selectedDepartment = selectedDepartment && (
-    <section>
-      <h2>{selectedDepartment.name}</h2>
-      <dl>
-        <div>
-          <dt>Email</dt>
-          <dd>{selectedDepartment.email}</dd>
-        </div>
-        {$selectedDepartmentTeachers}
-      </dl>
-    </section>
-  );
-
-  return (
-    <>
-      <h2>Departments</h2>
-      {$departments}
-      {$selectedDepartment}
-    </>
-  );
-}
+export default Departments;
