@@ -4,14 +4,12 @@ const facultyApi = api.injectEndpoints({
   endpoints: (build) => ({
     getFaculty: build.query({
       query: () => "/faculty",
-      transformResponse: (response) => response,
-      transformErrorResponse: (response) => response,
+      transformErrorResponse: (response) => response.faculty.error,
       providesTags: ["Faculty"],
     }),
     getProfessor: build.query({
       query: (id) => "/faculty/" + id,
-      transformResponse: (response) => response,
-      transformErrorResponse: (response) => response,
+      transformErrorResponse: (response) => response.professor.error,
       providesTags: ["Faculty"],
     }),
     updateProfessor: build.mutation({
@@ -20,8 +18,8 @@ const facultyApi = api.injectEndpoints({
         method: "PATCH",
         body: professor,
       }),
-      transformResponse: (response) => response,
-      transformErrorResponse: (response) => response,
+      transformResponse: (response) => response.professor,
+      transformErrorResponse: (response) => response.error,
       invalidatesTags: ["Faculty"],
     }),
     addProfessor: build.mutation({
@@ -30,8 +28,8 @@ const facultyApi = api.injectEndpoints({
         method: "POST",
         body: professor,
       }),
-      transformResponse: (response) => response,
-      transformErrorResponse: (response) => response,
+      transformResponse: (response) => response.professor,
+      transformErrorResponse: (response) => response.professor.error,
       invalidatesTags: ["Faculty"],
     }),
     deleteProfessor: build.mutation({
@@ -39,7 +37,7 @@ const facultyApi = api.injectEndpoints({
         url: "/faculty" + id,
         method: "DELETE",
       }),
-      transformErrorResponse: (response) => response,
+      transformErrorResponse: (response) => response.error,
       invalidatesTags: ["Faculty"],
     }),
   }),
