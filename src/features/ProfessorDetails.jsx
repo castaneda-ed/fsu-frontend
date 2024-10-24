@@ -63,7 +63,8 @@ if (isLoading) return <p>Loading...</p>;
             <h2>{professor.name}</h2>
             <p>{professor.bio}</p>
             <img src={professor.image} alt={professor.name}/>
-            <p>{professor.email}</p> 
+            <p>{professor.email}</p>
+            <p>{professor.departmentId}</p>
           </li>
               </ul>
     </>
@@ -72,6 +73,7 @@ if (isLoading) return <p>Loading...</p>;
 
 export default Professors;
 
+//disregard code below
 //ln 57 will be used to test what shows, and from there we 
 //can edit to see whether we should add:
 //<Link to={`/departments/${professor.departmentId}`}>
