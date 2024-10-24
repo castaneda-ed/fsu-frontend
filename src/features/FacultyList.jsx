@@ -3,7 +3,7 @@ import { useGetFacultyQuery } from "../store/facultySlice";
 
 export default function FacultyList() {
   const { data: faculty = [], isLoading, error } = useGetFacultyQuery();
-
+  console.log(faculty);
   if (isLoading) {
     return <p>Loading faculty...</p>;
   }
@@ -12,7 +12,7 @@ export default function FacultyList() {
     return <p>{error.message}</p>;
   }
 
-  if (!faculty) {
+  if (!faculty.length) {
     return <p>There are no professors.</p>;
   }
 
