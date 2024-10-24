@@ -1,6 +1,10 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
+import { useGetProfessorQuery } from '../store/facultySlice';
 
-// Fake data for professors
+// Fake data for professors 
+//keeping the below fake data 
+//for record's sake, can delete or change later
 const fakeProfessors = [
   {
     id: 1,
@@ -44,24 +48,29 @@ const fakeProfessors = [
   }
 ];
 
-export default function Professor() {
+// export default function Professor() {
+const Professors = () => {
+const { id } = useParams();
+const { data: professor, isLoading } = useGetProfessorQuery(id);
+console.log(professor)
+if (isLoading) return <p>Loading...</p>;
+
   return (
-    <div>
+    <>
       <h1>Professors</h1>
       <ul>
-        {fakeProfessors.map((professor) => (
-          <li key={professor.id}>
+          <li>
             <h2>{professor.name}</h2>
             <p>{professor.bio}</p>
-            <p>{professor.profileImage}</p>
-            <p>{professor.contactInfo}</p>
-            <p>english</p> 
+            <img src={professor.image} alt={professor.name}/>
+            <p>{professor.email}</p> 
           </li>
-        ))}
-      </ul>
-    </div>
+              </ul>
+    </>
   );
 };
+
+export default Professors;
 
 //ln 57 will be used to test what shows, and from there we 
 //can edit to see whether we should add:

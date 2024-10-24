@@ -2,6 +2,8 @@ import { createBrowserRouter } from "react-router-dom";
 import Root from "./layout/root";
 import Department from "./features/departments";
 import FacultyList from "./features/FacultyList";
+import Professors from "./features/ProfessorDetails";
+
 
 const router = createBrowserRouter([
   {
@@ -13,7 +15,7 @@ const router = createBrowserRouter([
         path: "/faculty",
         element: <FacultyList />,
       },
-      { path: "/faculty/:id", element: <ProfessorDetails />},
+      { path: "/faculty/:id", element: <Professors />},
     ],
   },
 ]);

@@ -9,7 +9,6 @@ const facultyApi = api.injectEndpoints({
     }),
     getProfessor: build.query({
       query: (id) => "/faculty/" + id,
-      transformResponse: (response) => response.professor,
       transformErrorResponse: (response) => response.professor.error,
       providesTags: ["Faculty"],
     }),
