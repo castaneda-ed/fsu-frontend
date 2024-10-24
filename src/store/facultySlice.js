@@ -4,7 +4,6 @@ const facultyApi = api.injectEndpoints({
   endpoints: (build) => ({
     getFaculty: build.query({
       query: () => "/faculty",
-      transformResponse: (response) => response.faculty,
       transformErrorResponse: (response) => response.faculty.error,
       providesTags: ["Faculty"],
     }),
