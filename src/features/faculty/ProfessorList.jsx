@@ -4,12 +4,20 @@ import { useGetFacultyQuery } from "../../store/facultySlice";
 
 // Function that renders a list of all departments
 export default function ProfessorList() {
-  const { data: professors, isLoading } = useGetFacultyQuery();
+  const { data: professors, error, isLoading } = useGetFacultyQuery();
 
   const [filter, setFilter] = useState("");
   const searchRegex = new RegExp(filter, "i");
 
   if (isLoading) return <h2>Loading faculty...</h2>;
+
+  if (error) {
+    return <p>{error.message}</p>;
+  }
+
+  if (!professors.length) {
+    return <p>There are no professors.</p>;
+  }
 
   return (
     <main>
