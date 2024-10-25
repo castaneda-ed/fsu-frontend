@@ -5,7 +5,8 @@ import AuthForm from "./features/account/Authform";
 import DepartmentList from "./features/departments/DepartmentList";
 import DepartmentDetails from "./features/departments/DepartmentDetails";
 import ProfessorList from "./features/faculty/ProfessorList";
-import ProfessorDetails from "./features/ProfessorDetails";
+import ProfessorDetails from "./features/faculty/ProfessorDetails";
+import AddDepartment from "./features/departments/AddDepartment";
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,7 @@ const router = createBrowserRouter([
       { path: "/login", element: <AuthForm /> },
       { path: "/faculty", element: <ProfessorList /> },
       { path: "/faculty/:id", element: <ProfessorDetails /> },
+      { path: "/new-department", element: <AddDepartment /> },
     ],
   },
 ]);

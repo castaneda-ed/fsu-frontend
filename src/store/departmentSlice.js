@@ -1,4 +1,5 @@
 import api from "./api";
+import { selectToken } from "./authSlice"; // Import your token selector
 
 const departmentApi = api.injectEndpoints({
   endpoints: (build) => ({
@@ -20,8 +21,6 @@ const departmentApi = api.injectEndpoints({
         method: "POST",
         body: newDepartment,
       }),
-      transformResponse: (response) => response,
-      transformErrorResponse: (response) => response,
       invalidatesTags: ["Department"],
     }),
     deleteDepartment: build.mutation({
@@ -29,21 +28,29 @@ const departmentApi = api.injectEndpoints({
         url: `/departments/${id}`,
         method: "DELETE",
       }),
-      transformResponse: (response) => response,
-      transformErrorResponse: (response) => response,
       invalidatesTags: ["Department"],
     }),
     updateDepartment: build.mutation({
-      query: (id, ...updatedDepartment) => ({
+      query: (id, updatedDepartment) => ({
         url: `/departments/${id}`,
         method: "PATCH",
         body: updatedDepartment,
       }),
-      transformResponse: (response) => response,
-      transformErrorResponse: (response) => response,
       invalidatesTags: ["Department"],
     }),
   }),
+});
+
+// Use prepareHeaders to add the token to the headers
+api.enhanceEndpoints({
+  addTagTypes: ["Department"],
+  prepareHeaders: (headers, { getState }) => {
+    const token = selectToken(getState()); // Get the token from the Redux store
+    if (token) {
+      headers.set("Authorization", `Bearer ${token}`); // Set the Authorization header
+    }
+    return headers; // Return the modified headers
+  },
 });
 
 export const {
