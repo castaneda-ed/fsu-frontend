@@ -11,7 +11,7 @@ export default function DepartmentDetails() {
 
   return (
     <>
-      <h1>Professor Details</h1>
+      <h1>Department Details</h1>
       <ul>
         <li>
           <h2>{department.name}</h2>

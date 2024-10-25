@@ -1,10 +1,14 @@
 import { useState } from "react";
 import ProfessorCard from "./ProfessorCard";
 import { useGetFacultyQuery } from "../../store/facultySlice";
+import { useSelector } from "react-redux";
+import { selectToken } from "../../store/authSlice";
+import { Link } from "react-router-dom";
 
 // Function that renders a list of all departments
 export default function ProfessorList() {
   const { data: professors, error, isLoading } = useGetFacultyQuery();
+  const token = useSelector(selectToken);
 
   const [filter, setFilter] = useState("");
   const searchRegex = new RegExp(filter, "i");
@@ -29,6 +33,7 @@ export default function ProfessorList() {
           onChange={(e) => setFilter(e.target.value)}
         />
       </form>
+      {token && <Link to={`/faculty/form`}>Create a new Professor</Link>}
       <ul className="faculty-list">
         {professors
           .filter((professor) => professor.name.match(searchRegex))
