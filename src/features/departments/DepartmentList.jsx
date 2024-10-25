@@ -30,7 +30,7 @@ export default function DepartmentList() {
           onChange={(e) => setFilter(e.target.value)}
         />
       </form>
-      {token && <Link to={`/new-department`}>Create a new Department</Link>}
+      {token && <Link to={`/departments/form`}>Create a new Department</Link>}
       <ul className="department-list">
         {departments
           .filter((department) => department.name.match(searchRegex))
