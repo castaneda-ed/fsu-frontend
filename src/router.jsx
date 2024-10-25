@@ -6,6 +6,7 @@ import DepartmentList from "./features/departments/DepartmentList";
 import DepartmentDetails from "./features/departments/DepartmentDetails";
 import ProfessorList from "./features/faculty/ProfessorList";
 import ProfessorDetails from "./features/ProfessorDetails";
+import FacultyForm from "./features/faculty/FacultyForm";
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,7 @@ const router = createBrowserRouter([
       { path: "/login", element: <AuthForm /> },
       { path: "/faculty", element: <ProfessorList /> },
       { path: "/faculty/:id", element: <ProfessorDetails /> },
+      { path: "/faculty/form", element: <FacultyForm /> },
     ],
   },
 ]);
