@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useAddProfessorMutation } from "../../store/facultySlice";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function FacultyForm() {
   const [name, setName] = useState("");
@@ -7,12 +8,22 @@ export default function FacultyForm() {
   const [bio, setBio] = useState("");
   const [image, setImage] = useState("");
   const [department, setDepartment] = useState("");
+  const navigate = useNavigate();
+  const { id } = useParams();
 
   const [addProfessor, { isLoading, error }] = useAddProfessorMutation();
+
+  function postProfessor(event) {
+    event.preventDefault();
+
+    addProfessor({ name, email, bio, image, department });
+    navigate();
+  }
+
   return (
     <>
       <h1>Add a Faculty Member</h1>
-      <form>
+      <form onClick={postProfessor}>
         <label>
           Name
           <input
@@ -25,7 +36,7 @@ export default function FacultyForm() {
         <label>
           Email
           <input
-            type="text"
+            type="email"
             name="email"
             value={email}
             onChange={(event) => setEmail(event.target.value)}
@@ -58,6 +69,7 @@ export default function FacultyForm() {
             onChange={(event) => setDepartment(event.target.value)}
           />
         </label>
+        <button>Submit</button>
       </form>
     </>
   );
